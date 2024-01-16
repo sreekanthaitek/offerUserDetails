@@ -38,7 +38,6 @@ const inputSchema = new mongoose.Schema({
     addrBank: String,
     accNum: String,
     sortCode: String,
-    bLocation: String,
     swiftCode: String,
     iban: String,
     bInfo: String,
@@ -53,7 +52,7 @@ const InputData = mongoose.model('InputData',inputSchema);
 
 app.post('/upload',async(req,res)=>{
     let {lName,fullName,fName,nationality,birthPlace,passNumber,pid,ped,pic,dob,gender,race,religion,ms,homeAdd,spouse,child,mail,tCon,mCon,bankDetails,pBank} = req.body;
-    let {addrBank,accNum,sortCode,bLocation,swiftCode,iban,bInfo,taxIdentity,emgName,emgRelation,contact,addr} = req.body;
+    let {addrBank,accNum,sortCode,swiftCode,iban,bInfo,taxIdentity,emgName,emgRelation,contact,addr} = req.body;
     try{
         const inputData = new InputData({
             fullName: fullName,
@@ -81,7 +80,6 @@ app.post('/upload',async(req,res)=>{
             addrBank: addrBank,
             accNum: accNum,
             sortCode: sortCode,
-            bLocation: bLocation,
             swiftCode: swiftCode,
             iban: iban,
             bInfo: bInfo,
