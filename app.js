@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 mongoose.connect(conn);
 
-const inputSchema = new mongoose.Schema({
+const inputSchema1 = new mongoose.Schema({
     fullName: String,
     lName: String,
     fName: String,
@@ -48,13 +48,13 @@ const inputSchema = new mongoose.Schema({
     addr: String,
 })
 
-const InputData = mongoose.model('InputData',inputSchema);
+const InputData1 = mongoose.model('employeeDetails',inputSchema1);
 
-app.post('/upload',async(req,res)=>{
+app.post('/uploadUser',async(req,res)=>{
     let {lName,fullName,fName,nationality,birthPlace,passNumber,pid,ped,pic,dob,gender,race,religion,ms,homeAdd,spouse,child,mail,tCon,mCon,bankDetails,pBank} = req.body;
     let {addrBank,accNum,sortCode,swiftCode,iban,bInfo,taxIdentity,emgName,emgRelation,contact,addr} = req.body;
     try{
-        const inputData = new InputData({
+        const inputData = new InputData1({
             fullName: fullName,
             lName: lName,
             fName: fName,
@@ -90,7 +90,7 @@ app.post('/upload',async(req,res)=>{
             addr: addr, 
         });
         await inputData.save();
-        let a3 = fs.readFileSync('public/submit.html')
+        let a3 = fs.readFileSync('public/submitUser.html')
         res.send(a3.toString());
     }
     catch(err){
@@ -99,12 +99,11 @@ app.post('/upload',async(req,res)=>{
     }
 })
 
-app.get('/',(req,res)=>{
-    res.sendFile(__dirname+'/public/form.html');
+app.get('/uploadUser',(req,res)=>{
+    res.sendFile(__dirname+'/public/uploadUser.html');
 });
-
-app.get('/upload',(req,res)=>{
-    res.sendFile(__dirname+'/public/upload.html');
+app.get('/',(req,res)=>{
+    res.sendFile(__dirname+'/public/formUser.html');
 });
 
 app.listen(port,()=>{
